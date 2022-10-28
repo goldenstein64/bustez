@@ -1,12 +1,10 @@
 require("luassert")
 
-local applyAssertions = require("bustez.assertions")
-local applyModifiers = require("bustez.modifiers")
+local register = require("bustez.register")
 
 ---@overload fun(value: any): Expectation
 local expect = require("bustez.expect")
 
-applyAssertions()
-applyModifiers()
+register()
 
 return expect
