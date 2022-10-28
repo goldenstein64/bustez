@@ -1,0 +1,7 @@
+{
+	"Lua.workspace.library": [
+		"lua_modules/share/lua/5.1",
+		"definition"
+	],
+	"Lua.workspace.checkThirdParty": false
+}
