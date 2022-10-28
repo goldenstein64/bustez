@@ -1,10 +1,15 @@
-require("luassert")
+local bustez = {
+	register = require("bustez.register"),
+	expect = require("bustez.expect"),
+}
 
-local register = require("bustez.register")
+local bustezMt = {}
 
----@overload fun(value: any): Expectation
-local expect = require("bustez.expect")
+function bustezMt:__call()
+	self.register()
+	return self.expect
+end
 
-register()
+setmetatable(bustez, bustezMt)
 
-return expect
+return bustez

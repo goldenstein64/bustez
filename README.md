@@ -10,7 +10,7 @@ Write a Lua script that sets `expect` to the `bustez` module.
 
 ```lua
 -- helper.lua
-expect = require 'bustez'
+expect = require 'bustez' ()
 ```
 
 And set this script as a helper in your `.busted` config.
@@ -35,3 +35,21 @@ describe("some test assertions", function()
 	end)
 end)
 ```
+
+`bustez` returns an API when not called:
+
+```lua
+local bustez = require 'bustez'
+
+-- the expect() function, the one used in tests
+bustez.expect(value) -> Expectation
+
+-- the register() function, registers all custom modifiers and assertions
+bustez.register()
+```
+
+## Gotchas
+
+* Expectations do not have an `:extend` method. Use `say` and `assert:register(...)` instead.
+
+* In most cases, `expect(value)[CHAIN HERE](...)` is an alias for `assert[CHAIN HERE](value, ...)`. The built-in assertions may have their arguments swapped to provide a better error message.
