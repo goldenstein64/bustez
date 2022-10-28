@@ -30,8 +30,7 @@ local function assertFalse()
 end
 expect(assertFalse).to.throw("assertion failed!")
 
--- It would make more sense for these arguments to be swapped, I think...
-expect("some").to.match("some string")
-expect("string").to.match("some string")
-expect("^%s+$").to.match("\t \t   \n")
-expect("[a-z]*").to.match("abcd")
+expect("some string").to.match("some")
+expect("some string").to.match("string")
+expect("\t \t   \n").to.match("^%s+$")
+expect("abcd").to.match("[a-z]*")
