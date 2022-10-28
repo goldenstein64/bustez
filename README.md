@@ -25,7 +25,7 @@ return {
 }
 ```
 
-Now you can write your expectations like you would in a TestEZ environment.
+Now you can write your expectations in Busted like you would in a TestEZ environment.
 
 ```lua
 describe("some test assertions", function()
