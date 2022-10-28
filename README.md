@@ -2,7 +2,7 @@
 
 [TestEZ's](https://github.com/Roblox/testez) `expect()` pattern embedded into the [luassert](https://github.com/lunarmodules/luassert) library.
 
-This is done by registering expectations and modifiers not found in `luassert` and adding an `expect` implementation, which is just `luassert's` `assert()` function with a few modifications.
+This is done by registering expectations and modifiers not found in `luassert` and adding an `expect` implementation, which is just a wrapper for `luassert's` `assert()`.
 
 ## Usage
 

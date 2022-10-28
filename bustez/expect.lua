@@ -7,6 +7,19 @@ local util = require 'luassert.util'
 -- list of namespaces
 local namespace = require("luassert.namespaces")
 
+local olderrorlevel = util.errorlevel
+
+-- overwriting vanilla util.errorlevel so it points to the test file
+function util.errorlevel(level)
+	local oldlevel = olderrorlevel(level)
+	local info = debug.getinfo(oldlevel + 1, "S")
+	if info.short_src:find("bustez[/\\]expect.lua$") then
+		return oldlevel + 1
+	else
+		return oldlevel
+	end
+end
+
 local expect -- the returned module table
 
 local swappedArgs = {
