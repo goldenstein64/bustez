@@ -7,11 +7,11 @@ local util = require 'luassert.util'
 -- list of namespaces
 local namespace = require("luassert.namespaces")
 
-local olderrorlevel = util.errorlevel
+local old_error_level = util.errorlevel
 
 -- overwriting vanilla util.errorlevel so it points to the test file
 function util.errorlevel(level)
-	local oldlevel = olderrorlevel(level)
+	local oldlevel = old_error_level(level)
 	local info = debug.getinfo(oldlevel + 1, "S")
 	if info.short_src:find("bustez[/\\]expect.lua$") then
 		return oldlevel + 1
