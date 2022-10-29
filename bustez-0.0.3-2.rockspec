@@ -1,5 +1,5 @@
 package = "bustez"
-version = "0.0.3-1"
+version = "0.0.3-2"
 source = {
    url = "git+https://github.com/goldenstein64/bustez.git",
    dir = "bustez"
@@ -22,7 +22,6 @@ build = {
    modules = {
       ["bustez.init"]       = "bustez/init.lua",
       ["bustez.expect"]     = "bustez/expect.lua",
-      ["bustez.assertions"] = "bustez/assertions.lua",
-      ["bustez.modifiers"]  = "bustez/modifiers.lua",
+      ["bustez.register"] = "bustez/register.lua",
    }
 }
