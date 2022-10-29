@@ -4,6 +4,8 @@
 
 This is done by registering expectations and modifiers not found in `luassert` and adding an `expect` implementation, which is just a wrapper for `luassert's` `assert()`.
 
+Type definitions for [sumneko/lua-language-server](https://github.com/sumneko/lua-language-server) are available at [goldenstein64/bustez-definitions](https://github.com/goldenstein64/bustez-definitions)
+
 ## Usage
 
 Write a Lua script that sets `expect` to the `bustez` module.
