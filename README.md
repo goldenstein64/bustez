@@ -43,10 +43,10 @@ end)
 ```lua
 local bustez = require 'bustez'
 
--- the expect() function, the one used in tests
+-- the expect() function, used in tests
 bustez.expect(value) -> Expectation
 
--- the register() function, registers all custom modifiers and assertions
+-- registers all custom modifiers and assertions
 bustez.register()
 ```
 
