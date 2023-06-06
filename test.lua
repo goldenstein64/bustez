@@ -34,3 +34,17 @@ expect("some string").to.match("some")
 expect("some string").to.match("string")
 expect("\t \t   \n").to.match("^%s+$")
 expect("abcd").to.match("[a-z]*")
+
+---@class bustez.Expectation
+expect:extend({
+	exist = function(value)
+		local pass = value ~= nil
+		return {
+			pass = pass,
+			message = pass and string.format("Expected %s to not exist", value)
+				or string.format("Expected %s to exist", value),
+		}
+	end,
+})
+
+expect(false).to.exist()

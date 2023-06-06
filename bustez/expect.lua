@@ -1,6 +1,8 @@
 ---This is a near-exact copy of the `luassert.assert` module with just some key changes
 
-local luassert = require("luassert.assert")
+local unpack = unpack or table.unpack
+
+local luassert = require("luassert")
 local util = require("luassert.util")
 
 -- list of namespaces
@@ -69,6 +71,19 @@ local expect = {
 
 	state = function(value)
 		return setmetatable({ mod = true, tokens = {}, value = value }, __state_meta)
+	end,
+
+	extend = function(self, matchers)
+		for name, matcher in pairs(matchers) do
+			luassert:register("assertion", name, function(state, arguments, level)
+				local result = matcher(unpack(arguments, 1, arguments.n))
+				if result.message ~= nil then
+					state.failure_message = result.message
+				end
+
+				return result.pass
+			end)
+		end
 	end,
 }
 
