@@ -1,7 +1,9 @@
 {
 	"Lua.workspace.library": [
 		"lua_modules/share/lua/5.1",
-		"definition"
+		"$LUA_ENVS/bustez/library",
+		"$APPDATA/Roaming/Code/User/globalStorage/sumneko.lua/addonManager/addons/luassert/module/library"
 	],
-	"Lua.workspace.checkThirdParty": false
+	"Lua.workspace.checkThirdParty": false,
+	"editor.formatOnSave": true
 }
