@@ -1,8 +1,7 @@
 ---This is a near-exact copy of the `luassert.assert` module with just some key changes
 
-local astate = require("luassert.state")
 local luassert = require("luassert.assert")
-local util = require 'luassert.util'
+local util = require("luassert.util")
 
 -- list of namespaces
 local namespace = require("luassert.namespaces")
@@ -20,8 +19,6 @@ function util.errorlevel(level)
 	end
 end
 
-local expect -- the returned module table
-
 local swappedArgs = {
 	same = true,
 	matches = true,
@@ -37,10 +34,10 @@ local __state_meta = {
 		local keys = util.extract_keys("assertion", self.tokens)
 
 		local assertion
-    for _, key in ipairs(keys) do
-      assertion = namespace.assertion[key] or assertion
-    end
-		
+		for _, key in ipairs(keys) do
+			assertion = namespace.assertion[key] or assertion
+		end
+
 		if assertion then
 			local value = rawget(self, "value")
 			local state = luassert.state()
@@ -51,7 +48,7 @@ local __state_meta = {
 				return self, state(value, ...)
 			end
 		end
-		
+
 		local state = luassert.state()
 		state.tokens = self.tokens
 		return self, state(...)
@@ -63,13 +60,14 @@ local __state_meta = {
 		end
 
 		return self
-	end
+	end,
 }
 
-expect = {
+-- the returned module table
+local expect = {
 	last_value = nil,
 
-	state = function(value) 
+	state = function(value)
 		return setmetatable({ mod = true, tokens = {}, value = value }, __state_meta)
 	end,
 }
@@ -85,7 +83,6 @@ local __meta = {
 	__index = function(self, key)
 		return rawget(self, key) or rawget(luassert, key) or self.state(rawget(self, "last_value"))[key]
 	end,
-
 }
 
 return setmetatable(expect, __meta)
