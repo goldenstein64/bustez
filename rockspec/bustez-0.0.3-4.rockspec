@@ -1,5 +1,5 @@
 package = "bustez"
-version = "0.0.3-3"
+version = "0.0.3-4"
 source = {
 	url = "git+https://github.com/goldenstein64/bustez.git",
 	dir = "bustez",
@@ -14,8 +14,8 @@ description = {
 }
 dependencies = {
 	"lua >= 5.1",
-	"luassert >= 1.9.0-1",
-	"say >= 1.4.1",
+	"luassert ~> 1.9",
+	"say ~> 1.4",
 }
 build = {
 	type = "builtin",
