@@ -1,4 +1,4 @@
-local expect = require("bustez")
+local expect = require("bustez")()
 
 expect(false).to.never.be.ok()
 expect(nil).to.never.be.ok()
