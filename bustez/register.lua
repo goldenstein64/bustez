@@ -40,6 +40,7 @@ return function()
 	local has_error = namespaces.assertion.error.callback
 	luassert:register("assertion", "ok", truthy, "assertion.ok.positive", "assertion.ok.negative")
 	luassert:register("assertion", "like", same, "assertion.like.positive", "assertion.like.negative")
+	luassert:register("assertion", "look_like", same, "assertion.like.positive", "assertion.like.negative")
 	luassert:register("assertion", "throw", has_error, "assertion.throw.positive", "assertion.throw.negative")
 	luassert:register("assertion", "a", is_type, "assertion.a.positive", "assertion.a.negative")
 	luassert:register("assertion", "an", is_type, "assertion.a.positive", "assertion.a.negative")
