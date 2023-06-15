@@ -46,6 +46,9 @@ expect("some string").to.match("string")
 expect("\t \t   \n").to.match("^%s+$")
 expect("abcd").to.match("[a-z]*")
 
+expect({ a = { 1, 2 }, b = { 1, 2 } }).never.to.be.unique(true)
+expect({ a = { 1, 2 }, b = { 1, 2 } }).to.be.unique(false)
+
 expect.array({ 1, 2, 3 }).to.have.no.holes()
 expect.array({ 1, 2, 3 }).to.have.holes(4)
 expect.array({ 1, 2, nil, 4 }).to.have.holes()
