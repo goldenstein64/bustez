@@ -55,3 +55,25 @@ do
 	expect(nil).to.never.exist()
 end
 
+do
+	---@class bustez.Expectation
+	---asserts that our expectation contains the given field
+	---@field field fun(key: string): bustez.Expectation
+
+	say:set("assertion.field.positive", "Expected to have property.\nObject:\n%s\nProperty:\n%s")
+	say:set("assertion.field.negative", "Expected not to have property.\nObject:\n%s\nProperty:\n%s")
+
+	---@type bustez.Matcher
+	local function field(state, arguments, level)
+		if type(arguments[1]) ~= "table" then
+			error("expectation must be a table in have_property assertion")
+		end
+
+		return arguments[1][arguments[2]] ~= nil
+	end
+
+	expect.extend({ field = field })
+
+	expect({ a = 1 }).to.have.field("a")
+	expect({}).to.never.have.field("a")
+end
