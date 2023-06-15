@@ -52,6 +52,7 @@ expect(function() end).to.be.a_function()
 expect(nil).to.be_nil()
 
 expect(true).to.be.like(true)
+expect(true).to.look.like(true)
 expect(true).to.never.be.like(false)
 expect({ 1, 2, 3 }).to.be.like({ 1, 2, 3 })
 expect({ 45, 50 }).to.never.be.like({ 90, 100 })
