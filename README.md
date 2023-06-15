@@ -76,39 +76,45 @@ expect(false).to.exist() --> passes
 
 Here is the list of assertions that `expect` accepts.
 
-| Key                        | Source          |
-|----------------------------|-----------------|
-| `.ok()`                    | TestEZ          |
-| `.like(value)`             | `assert.same()` |
-| `.throw(msg?)`             | TestEZ          |
-| `.a(type)`                 | TestEZ          |
-| `.an(type)`                | TestEZ          |
-| `._true()`                 | Luassert        |
-| `._false()`                | Luassert        |
-| `.boolean()`               | Luassert        |
-| `.number()`                | Luassert        |
-| `.string()`                | Luassert        |
-| `.table()`                 | Luassert        |
-| `._nil()`                  | Luassert        |
-| `.userdata()`              | Luassert        |
-| `._function()`             | Luassert        |
-| `.thread()`                | Luassert        |
-| `.returned_arguments(...)` | Luassert        |
-| `.same(value)`             | Luassert        |
-| `.matches(str)`            | Luassert        |
-| `.match(str)`              | Luassert        |
-| `.near(num, eps?)`         | Luassert        |
-| `.equals(value)`           | Luassert        |
-| `.equal(value)`            | Luassert        |
-| `.unique()`                | Luassert        |
-| `.error(msg?)`             | Luassert        |
-| `.errors(msg?)`            | Luassert        |
-| `.error_matches(str)`      | Luassert        |
-| `.error_match(str)`        | Luassert        |
-| `.matches_error(str)`      | Luassert        |
-| `.match_error(str)`        | Luassert        |
-| `.truthy()`                | Luassert        |
-| `.falsy()`                 | Luassert        |
+| Key                               | Source          |
+|-----------------------------------|-----------------|
+| `.ok()`                           | TestEZ          |
+| `.like(value)`                    | `assert.same()` |
+| `.throw(msg?)`                    | TestEZ          |
+| `.a(type)`                        | TestEZ          |
+| `.an(type)`                       | TestEZ          |
+| `._true()`                        | Luassert        |
+| `._false()`                       | Luassert        |
+| `.boolean()`                      | Luassert        |
+| `.number()`                       | Luassert        |
+| `.string()`                       | Luassert        |
+| `.table()`                        | Luassert        |
+| `._nil()`                         | Luassert        |
+| `.userdata()`                     | Luassert        |
+| `._function()`                    | Luassert        |
+| `.thread()`                       | Luassert        |
+| `.returned_arguments(...)`        | Luassert        |
+| `.same(value)`                    | Luassert        |
+| `.matches(str)`                   | Luassert        |
+| `.match(str)`                     | Luassert        |
+| `.near(num, eps?)`                | Luassert        |
+| `.equals(value)`                  | Luassert        |
+| `.equal(value)`                   | Luassert        |
+| `.unique(deep?)`                  | Luassert        |
+| `.error(msg?)`                    | Luassert        |
+| `.errors(msg?)`                   | Luassert        |
+| `.error_matches(str)`             | Luassert        |
+| `.error_match(str)`               | Luassert        |
+| `.matches_error(str)`             | Luassert        |
+| `.match_error(str)`               | Luassert        |
+| `.truthy()`                       | Luassert        |
+| `.falsy()`                        | Luassert        |
+| `.array()...holes(len?)`          | Luassert        |
+| `.spy()...returned_with(...)`     | Luassert        |
+| `.spy()...called_with(...)`       | Luassert        |
+| `.spy()...called(times)`          | Luassert        |
+| `.spy()...called_at_least(times)` | Luassert        |
+| `.spy()...called_at_most(times)`  | Luassert        |
 
 ## Modifiers
 
@@ -125,8 +131,7 @@ BustEZ also adds some modifiers to make constructs with `expect` more English-y.
 | `.never` | TestEZ   |
 | `.is`    | Luassert |
 | `.are`   | Luassert |
-| `.was`   | Luassert |
 | `.has`   | Luassert |
 | `.does`  | Luassert |
-| `.not`   | Luassert |
+| `._not`  | Luassert |
 | `.no`    | Luassert |
