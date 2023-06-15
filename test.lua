@@ -20,6 +20,12 @@ expect(true).to.never.equal(false)
 expect(3).to.equal(3)
 expect(1).to.never.equal(2)
 
+do
+	local tab = {}
+	expect(tab).to.equal(tab)
+	expect(tab).to.never.equal({})
+end
+
 expect(1.999).to.be.near(2, 0.01)
 expect(1).to.never.be.near(2, 0.1)
 
