@@ -50,7 +50,29 @@ expect.array({ 1, 2, 3 }).to.have.no.holes()
 expect.array({ 1, 2, 3 }).to.have.holes(4)
 expect.array({ 1, 2, nil, 4 }).to.have.holes()
 
+do
+	local funSpy = spy.new(function(...)
+		return 1, 2, 3
+	end)
+	funSpy(8, 10, 12)
 
+	expect.spy(funSpy).to.be.called_with(8, 10, 12)
+	expect.spy(funSpy).to.have.returned_with(1, 2, 3)
+
+	funSpy()
+	funSpy()
+
+	expect.spy(funSpy).to.be.called(3)
+	expect.spy(funSpy).to.be.called.at.least(1)
+	expect.spy(funSpy).to.be.called.at.most(5)
+end
+
+do
+	local obj = { some = function(...) end }
+	local funStub = stub(obj, "some")
+	obj.some(2, 3, 5)
+	expect.stub(funStub).to.be.called_with(2, 3, 5)
+end
 
 do
 	---@class bustez.Expectation
