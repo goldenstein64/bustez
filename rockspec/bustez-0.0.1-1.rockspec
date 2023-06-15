@@ -1,5 +1,5 @@
 package = "bustez"
-version = "dev-1"
+version = "0.0.1-1"
 source = {
 	url = "git+https://github.com/goldenstein64/bustez.git",
 	dir = "bustez",
