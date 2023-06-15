@@ -12,7 +12,7 @@ Write a Lua script that sets `expect` to the `bustez` module.
 
 ```lua
 -- helper.lua
-expect = require 'bustez' ()
+expect = require("bustez")()
 ```
 
 And set this script as a helper in your `.busted` config.
