@@ -31,6 +31,11 @@ end
 expect(fail).to.throw("oh no")
 expect(fail).to.never.throw("o")
 expect(fail).to.never.throw("Oh no!")
+
+expect(function()
+	expect(false).to.be.ok("totally not okay!")
+end).to.match_error("totally not okay!")
+
 local function assertFalse()
 	assert(false)
 end
@@ -40,6 +45,10 @@ expect("some string").to.match("some")
 expect("some string").to.match("string")
 expect("\t \t   \n").to.match("^%s+$")
 expect("abcd").to.match("[a-z]*")
+
+expect.array({ 1, 2, 3 }).to.have.no.holes()
+expect.array({ 1, 2, 3 }).to.have.holes(4)
+expect.array({ 1, 2, nil, 4 }).to.have.holes()
 
 
 
