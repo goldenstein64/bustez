@@ -6,13 +6,19 @@ This is done by registering expectations and modifiers not found in `luassert` a
 
 Type definitions for [LuaLS/lua-language-server](https://github.com/LuaLS/lua-language-server) are available at [goldenstein64/bustez-definitions](https://github.com/goldenstein64/bustez-definitions)
 
-## Usage
+## Busted Usage
 
-Write a Lua script that sets `expect` to the `bustez` module.
+Write a Lua script like this.
 
 ```lua
 -- helper.lua
-expect = require("bustez")()
+local bustez = require("bustez")
+bustez.register()
+_G.expect = bustez.expect
+
+--[[ alternatively, you can call the bustez module
+_G.expect = require("bustez")()
+--]]
 ```
 
 And set this script as a helper in your `.busted` config.
