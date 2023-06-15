@@ -33,6 +33,24 @@ expect(true).to.be.a("boolean")
 expect(4.5).to.be.a("number")
 expect({}).to.be.a("table")
 
+expect(true).to.be_true()
+expect(false).to.be_false()
+
+expect(5).to.be.a.number()
+expect(true).to.be.a.boolean()
+expect("foo").to.be.a.string()
+expect(coroutine.create(function() end)).to.be.a.thread()
+expect({}).to.be.a.table()
+
+do
+	local file = io.open("test.lua")
+	expect(file).to.be.a.userdata()
+	file:close()
+end
+
+expect(function() end).to.be.a_function()
+expect(nil).to.be_nil()
+
 expect(true).to.be.like(true)
 expect(true).to.never.be.like(false)
 expect({ 1, 2, 3 }).to.be.like({ 1, 2, 3 })
