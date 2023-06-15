@@ -25,6 +25,12 @@ expect("value").to.never.be.like(nil)
 expect(error).to.throw()
 expect(function() end).to.never.throw()
 
+local function fail()
+	error("oh no")
+end
+expect(fail).to.throw("oh no")
+expect(fail).to.never.throw("o")
+expect(fail).to.never.throw("Oh no!")
 local function assertFalse()
 	assert(false)
 end
