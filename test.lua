@@ -35,18 +35,23 @@ expect("some string").to.match("string")
 expect("\t \t   \n").to.match("^%s+$")
 expect("abcd").to.match("[a-z]*")
 
----@class bustez.Expectation
----asserts that our expectation is not `nil`
----@field exist fun(): bustez.Expectation
 
-say:set("assertion.exist.positive", "Expected to exist, but value was:\n%s")
-say:set("assertion.exist.negative", "Expected to not exist, but value was:\n%s")
 
-expect.extend({
-	exist = function(state, arguments, level)
-		return arguments[1] ~= nil
-	end,
-})
+do
+	---@class bustez.Expectation
+	---asserts that our expectation is not `nil`
+	---@field exist fun(): bustez.Expectation
 
-expect(false).to.exist()
-expect(nil).to.never.exist()
+	say:set("assertion.exist.positive", "Expected to exist, but value was:\n%s")
+	say:set("assertion.exist.negative", "Expected to not exist, but value was:\n%s")
+
+	expect.extend({
+		exist = function(state, arguments, level)
+			return arguments[1] ~= nil
+		end,
+	})
+
+	expect(false).to.exist()
+	expect(nil).to.never.exist()
+end
+
