@@ -5,5 +5,15 @@
 		"$USERPROFILE/AppData/Roaming/Code/User/globalStorage/sumneko.lua/addonManager/addons/luassert/module/library"
 	],
 	"Lua.workspace.checkThirdParty": false,
-	"editor.formatOnSave": true
+	"Lua.workspace.ignoreDir": [
+		".vscode",
+		"rockspec"
+	],
+	"editor.formatOnSave": true,
+	"cSpell.words": [
+		"bustez",
+		"goldenstein64",
+		"Luassert",
+		"userdata"
+	]
 }
