@@ -33,7 +33,7 @@ Now you can write your expectations in Busted like you would in a TestEZ environ
 describe("some test assertions", function()
   it("can run", function()
     expect(someValue).to.be.ok()
-    expect({ 1, 2, 3 }).to.be.like({ 1, 2, 3 })
+    expect({ 1, 2, 3 }).to.look.like({ 1, 2, 3 })
   end)
 end)
 ```
