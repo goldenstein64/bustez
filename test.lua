@@ -1,3 +1,6 @@
+local spy = require("luassert.spy")
+local stub = require("luassert.stub")
+local say = require("say")
 local expect = require("bustez")()
 
 expect(false).to.never.be.ok()
