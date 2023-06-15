@@ -1,9 +1,9 @@
 ---This is a near-exact copy of the `luassert.assert` module with just some key changes
 
-local unpack = unpack or table.unpack
-
+local astate = require("luassert.state")
 local luassert = require("luassert")
 local util = require("luassert.util")
+local say = require("say")
 
 -- list of namespaces
 local namespace = require("luassert.namespaces")
@@ -21,14 +21,68 @@ function util.errorlevel(level)
 	end
 end
 
-local swappedArgs = {
-	same = true,
-	matches = true,
-	match = true,
-	near = true,
-	equals = true,
-	equal = true,
-}
+local function geterror(assertion_message, failure_message, args)
+	if util.hastostring(failure_message) then
+		failure_message = tostring(failure_message)
+	elseif failure_message ~= nil then
+		failure_message = astate.format_argument(failure_message)
+	end
+	local message = say(assertion_message, luassert:format(args))
+	if message and failure_message then
+		message = failure_message .. "\n" .. message
+	end
+	return message or failure_message
+end
+
+local function applyArgMap(mapping, ...)
+	local args = util.pack(...)
+
+	local newArgs = { n = 0 }
+	for i = 1, #mapping - 1 do
+		local index = mapping[i]
+		util.tinsert(newArgs, args[index])
+	end
+
+	local lastIndex = mapping[#mapping]
+	for index = lastIndex, args.n do
+		util.tinsert(newArgs, args[index])
+	end
+
+	local n = (#mapping - 1) + (args.n - lastIndex + 1)
+	return util.unpack(newArgs, 1, n)
+end
+
+local argMap
+do
+	local default = { 1 }
+	local swapped = { 2, 1, 3 }
+	local noValue = { 2 }
+
+	argMap = {
+		same = swapped,
+		matches = swapped,
+		match = swapped,
+		near = swapped,
+		equals = swapped,
+		equal = swapped,
+
+		holes = noValue,
+		called = noValue,
+		called_with = noValue,
+		returned_with = noValue,
+		called_at_least = noValue,
+		called_at_most = noValue,
+	}
+
+	setmetatable(argMap, {
+		__index = function()
+			return default
+		end,
+	})
+end
+
+---the returned module table
+local expect
 
 local __state_meta = {
 
@@ -40,20 +94,43 @@ local __state_meta = {
 			assertion = namespace.assertion[key] or assertion
 		end
 
+		local subject = rawget(self, "subject_value")
+
 		if assertion then
-			local value = rawget(self, "value")
-			local state = luassert.state()
-			state.tokens = self.tokens
-			if swappedArgs[assertion.name] then
-				return self, state(..., value, select(2, ...))
-			else
-				return self, state(value, ...)
+			for _, key in ipairs(keys) do
+				if namespace.modifier[key] then
+					namespace.modifier[key].callback(self)
+				end
+			end
+
+			local arguments = util.make_arglist(applyArgMap(argMap[assertion.name], subject, ...))
+			local val, retargs = assertion.callback(self, arguments, util.errorlevel())
+
+			if (not val) == self.mod then
+				local message = assertion.positive_message
+				if not self.mod then
+					message = assertion.negative_message
+				end
+				local err = geterror(message, rawget(self, "failure_message"), arguments)
+				error(err or "assertion failed!", util.errorlevel())
+			end
+
+			if retargs then
+				return util.unpack(retargs)
+			end
+			return ...
+		else
+			local arguments = util.make_arglist(...)
+			self.tokens = {}
+
+			for _, key in ipairs(keys) do
+				if namespace.modifier[key] then
+					namespace.modifier[key].callback(self, arguments, util.errorlevel())
+				end
 			end
 		end
 
-		local state = luassert.state()
-		state.tokens = self.tokens
-		return self, state(...)
+		return self
 	end,
 
 	__index = function(self, key)
@@ -65,24 +142,16 @@ local __state_meta = {
 	end,
 }
 
--- the returned module table
-local expect = {
-	last_value = nil,
-
+expect = {
 	state = function(value)
-		return setmetatable({ mod = true, tokens = {}, value = value }, __state_meta)
+		return setmetatable({ mod = true, tokens = {}, subject_value = value }, __state_meta)
 	end,
 
-	extend = function(self, matchers)
+	extend = function(matchers)
 		for name, matcher in pairs(matchers) do
-			luassert:register("assertion", name, function(state, arguments, level)
-				local result = matcher(unpack(arguments, 1, arguments.n))
-				if result.message ~= nil then
-					state.failure_message = result.message
-				end
-
-				return result.pass
-			end)
+			local positive_message = string.format("assertion.%s.positive", name)
+			local negative_message = string.format("assertion.%s.negative", name)
+			luassert:register("assertion", name, matcher, positive_message, negative_message)
 		end
 	end,
 }
@@ -91,12 +160,11 @@ local __meta = {
 
 	-- unlike assert(), expect() does not perform an assertion when called
 	__call = function(self, value, ...)
-		self.last_value = value
-		return self, value, ...
+		return expect.state(value)
 	end,
 
 	__index = function(self, key)
-		return rawget(self, key) or rawget(luassert, key) or self.state(rawget(self, "last_value"))[key]
+		return rawget(self, key) or rawget(luassert, key) or expect.state(nil)[key]
 	end,
 }
 
