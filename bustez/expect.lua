@@ -147,12 +147,8 @@ expect = {
 		return setmetatable({ mod = true, tokens = {}, subject_value = value }, __state_meta)
 	end,
 
-	extend = function(matchers)
-		for name, matcher in pairs(matchers) do
-			local positive_message = string.format("assertion.%s.positive", name)
-			local negative_message = string.format("assertion.%s.negative", name)
-			luassert:register("assertion", name, matcher, positive_message, negative_message)
-		end
+	map_args = function(assertion_name, map)
+		argMap[assertion_name] = (not map or #map ~= 0) and map or nil
 	end,
 }
 
