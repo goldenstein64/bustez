@@ -1,16 +1,19 @@
 package = "bustez"
-version = "scm-1"
+version = "dev-1"
 source = {
 	url = "git+https://github.com/goldenstein64/bustez.git",
 	dir = "bustez",
 }
 description = {
-	summary = "TestEZ's expect() framework embedded into Busted",
+	summary = "TestEZ injected into Busted",
 	detailed = [[
-      Roblox TestEZ's `expect()` pattern embedded into the Busted library.
+      BustEZ injects Roblox's TestEZ syntax into the Busted library by 
+			registering new assertions and modifiers and introducing an alternative 
+			function to assert.
    ]],
 	homepage = "https://github.com/goldenstein64/bustez",
-	license = "MIT <http://opensource.org/licenses/MIT>",
+	issues_url = "https://github.com/goldenstein64/bustez/issues",
+	license = "MIT",
 }
 dependencies = {
 	"lua >= 5.1",
