@@ -6,6 +6,12 @@ This is done by registering expectations and modifiers not found in `luassert` a
 
 Type definitions for [LuaLS/lua-language-server](https://github.com/LuaLS/lua-language-server) are available at [goldenstein64/bustez-definitions](https://github.com/goldenstein64/bustez-definitions)
 
+## Installation
+
+```sh
+luarocks install bustez
+```
+
 ## Busted Usage
 
 Write a Lua script like this.
