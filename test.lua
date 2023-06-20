@@ -1,5 +1,6 @@
 local spy = require("luassert.spy")
 local stub = require("luassert.stub")
+local assert = require("luassert")
 local say = require("say")
 local expect = require("bustez")()
 
@@ -121,11 +122,11 @@ do
 	say:set("assertion.exist.positive", "Expected to exist, but value was:\n%s")
 	say:set("assertion.exist.negative", "Expected to not exist, but value was:\n%s")
 
-	expect.extend({
-		exist = function(state, arguments, level)
-			return arguments[1] ~= nil
-		end,
-	})
+	local function exist(state, arguments, level)
+		return arguments[1] ~= nil
+	end
+
+	assert:register("assertion", "exist", exist, "assertion.exist.positive", "assertion.exist.negative")
 
 	expect(false).to.exist()
 	expect(nil).to.never.exist()
@@ -148,7 +149,7 @@ do
 		return arguments[1][arguments[2]] ~= nil
 	end
 
-	expect.extend({ field = field })
+	assert:register("assertion", "field", field, "assertion.field.positive", "assertion.field.negative")
 
 	expect({ a = 1 }).to.have.field("a")
 	expect({}).to.never.have.field("a")
