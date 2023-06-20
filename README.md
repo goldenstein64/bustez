@@ -64,24 +64,45 @@ bustez.register()
 
 In most cases, `expect(value)[CHAIN HERE](...)` is an alias for `assert[CHAIN HERE](value, ...)`. The built-in assertions may have their arguments swapped to provide a better error message.
 
-Expectations can be added sort of like TestEZ using `expect:extend(...)`.
+## Extensions
+
+`expect` accepts any assertions and modifiers created using `luassert`.
 
 ```lua
----If you're using bustez-definitions, add the @class annotation.
----@class bustez.Expectation
-expect:extend({
-  exist = function(value)
-    local pass = value ~= nil
-    return {
-      pass = pass,
-      message = pass 
-        and string.format("expected %s to not exist", value)
-         or string.format("expected %s to exist", value),
-    }
-  end,
-})
+---@class luassert.internal
+---@field exist fun(value): luassert.internal
 
-expect(false).to.exist() --> passes
+---@class bustez.Expectation
+---@field exist fun(): bustez.Expectation
+
+say:set("assertion.exist.positive", "expected to exist, got:\n%s")
+say:set("assertion.exist.negative", "expected to exist, got:\n%s")
+
+local function exist(state, arguments, level)
+  return arguments[1] ~= nil
+end
+
+assert:register("assertion", "exist", exist, "assertion.exist.positive", "assertion.exist.negative")
+
+-- examples
+assert.does.exist(false)
+assert.does_not.exist(nil)
+expect(true).to.exist()
+```
+
+Sometimes, it may be more natural for `expect` to send arguments in a different order.
+
+```lua
+assert.matches("^b", "brunt")
+expect("brunt").to.match("^b")
+```
+
+This can be done for extended assertions using `expect.map_args()`. The first argument
+
+```lua
+-- swap args 1 and 2, continue as normal for args 3 and beyond
+expect.map_args("match", { 2, 1, 3 })
+expect.map_args("matches", { 2, 1, 3 })
 ```
 
 ## Assertions
@@ -147,44 +168,3 @@ BustEZ also adds some modifiers to make constructs with `expect` more English-y.
 | `.does`  | Luassert |
 | `._not`  | Luassert |
 | `.no`    | Luassert |
-
-## Extensions
-
-`expect` accepts any assertions and modifiers created using `luassert`.
-
-```lua
----@class luassert.internal
----@field exist fun(value): luassert.internal
-
----@class bustez.Expectation
----@field exist fun(): bustez.Expectation
-
-say:set("assertion.exist.positive", "expected to exist, got:\n%s")
-say:set("assertion.exist.negative", "expected to exist, got:\n%s")
-
-local function exist(state, arguments, level)
-  return arguments[1] ~= nil
-end
-
-assert:register("assertion", "exist", exist, "assertion.exist.positive", "assertion.exist.negative")
-
--- examples
-assert.does.exist(false)
-assert.does_not.exist(nil)
-expect(true).to.exist()
-```
-
-Sometimes, it may be more natural for `expect` to send arguments in a different order.
-
-```lua
-assert.matches("^b", "brunt")
-expect("brunt").to.match("^b")
-```
-
-This can be done for extended assertions using `expect.map_args()`. The first argument
-
-```lua
--- swap args 1 and 2, continue as normal for args 3 and beyond
-expect.map_args("match", { 2, 1, 3 })
-expect.map_args("matches", { 2, 1, 3 })
-```
