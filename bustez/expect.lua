@@ -8,19 +8,6 @@ local say = require("say")
 -- list of namespaces
 local namespace = require("luassert.namespaces")
 
-local old_error_level = util.errorlevel
-
--- overwriting vanilla util.errorlevel so it points to the test file
-function util.errorlevel(level)
-	local oldlevel = old_error_level(level)
-	local info = debug.getinfo(oldlevel + 1, "S")
-	if info.short_src:find("bustez[/\\]expect.lua$") then
-		return oldlevel + 1
-	else
-		return oldlevel
-	end
-end
-
 local function geterror(assertion_message, failure_message, args)
 	if util.hastostring(failure_message) then
 		failure_message = tostring(failure_message)
