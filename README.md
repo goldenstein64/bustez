@@ -153,18 +153,19 @@ Here is the list of assertions that `expect` accepts.
 
 BustEZ also adds some modifiers to make constructs with `expect` more English-y.
 
-| Key      | Source   |
-|----------|----------|
-| `.to`    | TestEZ   |
-| `.be`    | TestEZ   |
-| `.been`  | TestEZ   |
-| `.have`  | TestEZ   |
-| `.was`   | TestEZ   |
-| `.at`    | TestEZ   |
-| `.never` | TestEZ   |
-| `.is`    | luassert |
-| `.are`   | luassert |
-| `.has`   | luassert |
-| `.does`  | luassert |
-| `._not`  | luassert |
-| `.no`    | luassert |
+| Key             | Source   |
+|-----------------|----------|
+| `.to`           | TestEZ   |
+| `.be`           | TestEZ   |
+| `.been`         | TestEZ   |
+| `.have`         | TestEZ   |
+| `.was`          | TestEZ   |
+| `.at`           | TestEZ   |
+| `.never`        | TestEZ   |
+| `.is`           | luassert |
+| `.are`          | luassert |
+| `.has`          | luassert |
+| `.does`         | luassert |
+| `._not`         | luassert |
+| `.no`           | luassert |
+| `.message(str)` | luassert |
