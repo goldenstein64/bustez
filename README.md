@@ -97,7 +97,7 @@ assert.matches("^b", "brunt")
 expect("brunt").to.match("^b")
 ```
 
-This can be done for extended assertions using `expect.map_args()`. The first argument
+This can be done for extended assertions using `expect.map_args()`.
 
 ```lua
 -- swap args 1 and 2, continue as normal for args 3 and beyond
