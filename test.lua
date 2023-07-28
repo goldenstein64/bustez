@@ -104,6 +104,10 @@ do
 
 	expect.spy(funSpy).to.be.called(3)
 	expect.spy(funSpy).to.be.called.at.least(1)
+	expect.spy(funSpy).to.be.called.at.least(3)
+	expect.spy(funSpy).not_to.be.called.at.least(4)
+	expect.spy(funSpy).not_to.be.called.at.most(2)
+	expect.spy(funSpy).to.be.called.at.most(3)
 	expect.spy(funSpy).to.be.called.at.most(5)
 end
 
