@@ -76,7 +76,7 @@ In most cases, `expect(value)[CHAIN HERE](...)` is an alias for `assert[CHAIN HE
 ---@field exist fun(): bustez.Expectation
 
 say:set("assertion.exist.positive", "expected to exist, got:\n%s")
-say:set("assertion.exist.negative", "expected to exist, got:\n%s")
+say:set("assertion.exist.negative", "expected not to exist, got:\n%s")
 
 local function exist(state, arguments, level)
   return arguments[1] ~= nil
