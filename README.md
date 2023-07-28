@@ -109,45 +109,46 @@ expect.map_args("matches", { 2, 1, 3 })
 
 Here is the list of assertions that `expect` accepts.
 
-| Key                               | Source          |
-|-----------------------------------|-----------------|
-| `.ok()`                           | TestEZ          |
-| `.like(value)`                    | `assert.same()` |
-| `.throw(msg?)`                    | TestEZ          |
-| `.a(type)`                        | TestEZ          |
-| `.an(type)`                       | TestEZ          |
-| `._true()`                        | luassert        |
-| `._false()`                       | luassert        |
-| `.boolean()`                      | luassert        |
-| `.number()`                       | luassert        |
-| `.string()`                       | luassert        |
-| `.table()`                        | luassert        |
-| `._nil()`                         | luassert        |
-| `.userdata()`                     | luassert        |
-| `._function()`                    | luassert        |
-| `.thread()`                       | luassert        |
-| `.returned_arguments(...)`        | luassert        |
-| `.same(value)`                    | luassert        |
-| `.matches(str)`                   | luassert        |
-| `.match(str)`                     | luassert        |
-| `.near(num, eps?)`                | luassert        |
-| `.equals(value)`                  | luassert        |
-| `.equal(value)`                   | luassert        |
-| `.unique(deep?)`                  | luassert        |
-| `.error(msg?)`                    | luassert        |
-| `.errors(msg?)`                   | luassert        |
-| `.error_matches(str)`             | luassert        |
-| `.error_match(str)`               | luassert        |
-| `.matches_error(str)`             | luassert        |
-| `.match_error(str)`               | luassert        |
-| `.truthy()`                       | luassert        |
-| `.falsy()`                        | luassert        |
-| `.array()...holes(len?)`          | luassert        |
-| `.spy()...returned_with(...)`     | luassert        |
-| `.spy()...called_with(...)`       | luassert        |
-| `.spy()...called(times)`          | luassert        |
-| `.spy()...called_at_least(times)` | luassert        |
-| `.spy()...called_at_most(times)`  | luassert        |
+| Key                                   | Source          |
+|---------------------------------------|-----------------|
+| `.to.be.ok()`                         | TestEZ          |
+| `.to.look.like(value)`                | `assert.same()` |
+| `.to.be.like(value)`                  | `assert.same()` |
+| `.to.throw(msg?)`                     | TestEZ          |
+| `.to.be.a(type)`                      | TestEZ          |
+| `.to.be.an(type)`                     | TestEZ          |
+| `.to.be._true()`                      | luassert        |
+| `.to.be._false()`                     | luassert        |
+| `.to.be._nil()`                       | luassert        |
+| `.to.be.a.boolean()`                  | luassert        |
+| `.to.be.a.number()`                   | luassert        |
+| `.to.be.a.string()`                   | luassert        |
+| `.to.be.a.table()`                    | luassert        |
+| `.to.be.a.userdata()`                 | luassert        |
+| `.to.be.a._function()`                | luassert        |
+| `.to.be.a.thread()`                   | luassert        |
+| `.returned.arguments(...)`            | luassert        |
+| `.same(value)`                        | luassert        |
+| `.matches(str)`                       | luassert        |
+| `.to.match(str)`                      | luassert        |
+| `.to.be.near(num, eps?)`              | luassert        |
+| `.equals(value)`                      | luassert        |
+| `.to.equal(value)`                    | luassert        |
+| `.to.be.unique(deep?)`                | luassert        |
+| `.to.error(msg?)`                     | luassert        |
+| `.errors(msg?)`                       | luassert        |
+| `.error.matches(str)`                 | luassert        |
+| `.error.match(str)`                   | luassert        |
+| `.matches.error(str)`                 | luassert        |
+| `.to.match.error(str)`                | luassert        |
+| `.to.be.truthy()`                     | luassert        |
+| `.to.be.falsy()`                      | luassert        |
+| `.array().to.have.holes(len?)`        | luassert        |
+| `.spy().to.have.returned.with(...)`   | luassert        |
+| `.spy().to.be.called.with(...)`       | luassert        |
+| `.spy().to.be.called(times)`          | luassert        |
+| `.spy().to.be.called.at.least(times)` | luassert        |
+| `.spy().to.be.called.at.most(times)`  | luassert        |
 
 ## Modifiers
 
