@@ -18,12 +18,12 @@ Write a Lua script like this.
 
 ```lua
 -- helper.lua
-local bustez = require("luassert.bustez")
+local bustez = require("bustez")
 bustez.register()
 _G.expect = bustez.expect
 
 --[[ alternatively, you can call the bustez module
-_G.expect = require("luassert.bustez")()
+_G.expect = require("bustez")()
 --]]
 ```
 
@@ -53,7 +53,7 @@ end)
 `bustez` returns an API when not called:
 
 ```lua
-local bustez = require 'luassert.bustez'
+local bustez = require 'bustez'
 
 -- the expect() function, used in tests
 bustez.expect(value) --> Expectation
