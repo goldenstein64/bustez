@@ -2,7 +2,7 @@ local spy = require("luassert.spy")
 local stub = require("luassert.stub")
 local assert = require("luassert")
 local say = require("say")
-local expect = require("bustez")()
+local expect = require("luassert.bustez")()
 
 expect(false).to.never.be.ok()
 expect(nil).to.never.be.ok()

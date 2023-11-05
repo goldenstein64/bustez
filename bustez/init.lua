@@ -1,6 +1,6 @@
 local bustez = {
-	register = require("bustez.register"),
-	expect = require("bustez.expect"),
+	register = require("luassert.bustez.register"),
+	expect = require("luassert.bustez.expect"),
 }
 
 local bustezMt = {}
