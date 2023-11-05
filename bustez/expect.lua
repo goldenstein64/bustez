@@ -5,6 +5,17 @@ local luassert = require("luassert")
 local util = require("luassert.util")
 local say = require("say")
 
+-- This is needed to be used for busted to
+-- properly recognize it as fail on reporter(and not as error).
+local fail
+local success, _ = pcall(function()
+	fail = require("busted.core")().fail
+end)
+-- Falls back to normal error in case busted is not used.
+if not success then
+	fail = error
+end
+
 -- list of namespaces
 local namespace = require("luassert.namespaces")
 
@@ -99,7 +110,7 @@ local __state_meta = {
 					message = assertion.negative_message
 				end
 				local err = geterror(message, rawget(self, "failure_message"), arguments)
-				luassert(false, err or "assertion failed!", util.errorlevel())
+				fail(err or "assertion failed!", util.errorlevel())
 			end
 
 			if retargs then
