@@ -99,7 +99,7 @@ local __state_meta = {
 					message = assertion.negative_message
 				end
 				local err = geterror(message, rawget(self, "failure_message"), arguments)
-				luassert(err or "assertion failed!", util.errorlevel())
+				luassert(false, err or "assertion failed!", util.errorlevel())
 			end
 
 			if retargs then
