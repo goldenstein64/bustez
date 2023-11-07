@@ -32,7 +32,7 @@ local function geterror(assertion_message, failure_message, args)
 	return message or failure_message
 end
 
-local function applyArgMap(mapping, ...)
+local function apply_arg_map(mapping, ...)
 	local args = util.pack(...)
 
 	local newArgs = { n = 0 }
@@ -50,13 +50,13 @@ local function applyArgMap(mapping, ...)
 	return util.unpack(newArgs, 1, n)
 end
 
-local argMap
+local arg_map
 do
 	local default = { 1 }
 	local swapped = { 2, 1, 3 }
 	local noValue = { 2 }
 
-	argMap = {
+	arg_map = {
 		same = swapped,
 		matches = swapped,
 		match = swapped,
@@ -72,7 +72,7 @@ do
 		called_at_most = noValue,
 	}
 
-	setmetatable(argMap, {
+	setmetatable(arg_map, {
 		__index = function()
 			return default
 		end,
@@ -101,7 +101,7 @@ local __state_meta = {
 				end
 			end
 
-			local arguments = util.make_arglist(applyArgMap(argMap[assertion.name], subject, ...))
+			local arguments = util.make_arglist(apply_arg_map(arg_map[assertion.name], subject, ...))
 			local val, retargs = assertion.callback(self, arguments, util.errorlevel())
 
 			if (not val) == self.mod then
@@ -146,7 +146,7 @@ expect = {
 	end,
 
 	map_args = function(assertion_name, map)
-		argMap[assertion_name] = (not map or #map ~= 0) and map or nil
+		arg_map[assertion_name] = (not map or #map ~= 0) and map or nil
 	end,
 }
 
