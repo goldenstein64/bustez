@@ -71,7 +71,7 @@ expect(fail).to.never.throw("Oh no!")
 
 expect(function()
 	expect(false).to.be.ok("totally not okay!")
-end).to.match_error("totally not okay!")
+end).to.match.error("totally not okay!")
 
 local function assertFalse()
 	assert(false)
