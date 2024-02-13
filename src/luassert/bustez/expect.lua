@@ -41,12 +41,12 @@ local function apply_arg_map(mapping, ...)
 		util.tinsert(newArgs, args[index])
 	end
 
-	local lastIndex = mapping[#mapping]
-	for index = lastIndex, args.n do
+	local last_index = mapping[#mapping]
+	for index = last_index, args.n do
 		util.tinsert(newArgs, args[index])
 	end
 
-	local n = (#mapping - 1) + (args.n - lastIndex + 1)
+	local n = #mapping + args.n - last_index
 	return util.unpack(newArgs, 1, n)
 end
 
@@ -78,9 +78,6 @@ do
 		end,
 	})
 end
-
----the returned module table
-local expect
 
 local __state_meta = {
 
@@ -140,7 +137,7 @@ local __state_meta = {
 	end,
 }
 
-expect = {
+local expect = {
 	state = function(value)
 		return setmetatable({ mod = true, tokens = {}, subject_value = value }, __state_meta)
 	end,
@@ -158,7 +155,7 @@ local __meta = {
 	end,
 
 	__index = function(self, key)
-		return rawget(self, key) or rawget(luassert, key) or expect.state(nil)[key]
+		return rawget(luassert, key) or self.state(nil)[key]
 	end,
 }
 
