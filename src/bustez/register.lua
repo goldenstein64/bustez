@@ -15,6 +15,11 @@ local function is_type(state, arguments, level)
 	return arguments.n > 1 and type(arguments[1]) == arguments[2]
 end
 
+local function is_ok(state, arguments, level)
+	set_failure_message(state, arguments[2])
+	return arguments[1] ~= nil
+end
+
 return function()
 	local is = namespaces.modifier.is.callback
 	local is_not = namespaces.modifier.no.callback
@@ -26,8 +31,8 @@ return function()
 	luassert:register("modifier", "at", is)
 	luassert:register("modifier", "never", is_not)
 
-	say:set("assertion.ok.positive", "expected to be truthy, but value was:\n%s")
-	say:set("assertion.ok.negative", "Expected to not be truthy, but value was:\n%s")
+	say:set("assertion.ok.positive", "Expected to be non-nil, but value was:\n%s")
+	say:set("assertion.ok.negative", "Expected to be nil, but value was:\n%s")
 	say:set("assertion.a.positive", "Expected values to be the same.\nPassed in: %s\nExpected:\ntype %s")
 	say:set("assertion.a.negative", "Expected values to not be the same.\nPassed in: %s\nExpected:\ntype %s")
 	say:set("assertion.like.positive", "Expected objects to be the same.\nPassed in:\n%s\nExpected:\n%s")
@@ -35,10 +40,9 @@ return function()
 	say:set("assertion.throw.positive", "Expected a different error.\nCaught:\n%s\nExpected:\n%s")
 	say:set("assertion.throw.negative", "Expected no error, but caught:\n%s")
 
-	local truthy = namespaces.assertion.truthy.callback
 	local same = namespaces.assertion.same.callback
 	local has_error = namespaces.assertion.error.callback
-	luassert:register("assertion", "ok", truthy, "assertion.ok.positive", "assertion.ok.negative")
+	luassert:register("assertion", "ok", is_ok, "assertion.ok.positive", "assertion.ok.negative")
 	luassert:register("assertion", "like", same, "assertion.like.positive", "assertion.like.negative")
 	luassert:register("assertion", "look_like", same, "assertion.like.positive", "assertion.like.negative")
 	luassert:register("assertion", "throw", has_error, "assertion.throw.positive", "assertion.throw.negative")

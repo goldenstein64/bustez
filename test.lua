@@ -4,8 +4,8 @@ local assert = require("luassert")
 local say = require("say")
 local expect = require("bustez")()
 
-expect(false).to.never.be.ok()
 expect(nil).to.never.be.ok()
+expect(false).to.be.ok()
 expect(true).to.be.ok()
 expect(true).to.be.have.been.was.at.is.are.has.does.ok()
 expect(true).to.never.never.be.ok()
@@ -70,7 +70,7 @@ expect(fail).to.never.throw("o")
 expect(fail).to.never.throw("Oh no!")
 
 expect(function()
-	expect(false).to.be.ok("totally not okay!")
+	expect(nil).to.be.ok("totally not okay!")
 end).to.match.error("totally not okay!")
 
 local function assertFalse()
