@@ -35,26 +35,26 @@ end
 local function apply_arg_map(mapping, ...)
 	local args = util.pack(...)
 
-	local newArgs = { n = 0 }
+	local new_args = { n = 0 }
 	for i = 1, #mapping - 1 do
 		local index = mapping[i]
-		util.tinsert(newArgs, args[index])
+		util.tinsert(new_args, args[index])
 	end
 
 	local last_index = mapping[#mapping]
 	for index = last_index, args.n do
-		util.tinsert(newArgs, args[index])
+		util.tinsert(new_args, args[index])
 	end
 
 	local n = #mapping + args.n - last_index
-	return util.unpack(newArgs, 1, n)
+	return util.unpack(new_args, 1, n)
 end
 
 local arg_map
 do
 	local default = { 1 }
 	local swapped = { 2, 1, 3 }
-	local noValue = { 2 }
+	local no_value = { 2 }
 
 	arg_map = {
 		same = swapped,
@@ -64,12 +64,12 @@ do
 		equals = swapped,
 		equal = swapped,
 
-		holes = noValue,
-		called = noValue,
-		called_with = noValue,
-		returned_with = noValue,
-		called_at_least = noValue,
-		called_at_most = noValue,
+		holes = no_value,
+		called = no_value,
+		called_with = no_value,
+		returned_with = no_value,
+		called_at_least = no_value,
+		called_at_most = no_value,
 	}
 
 	setmetatable(arg_map, {

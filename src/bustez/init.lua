@@ -3,13 +3,13 @@ local bustez = {
 	expect = require("bustez.expect"),
 }
 
-local bustezMt = {}
+local bustez_mt = {}
 
-function bustezMt:__call()
+function bustez_mt:__call()
 	self.register()
 	return self.expect
 end
 
-setmetatable(bustez, bustezMt)
+setmetatable(bustez, bustez_mt)
 
 return bustez
