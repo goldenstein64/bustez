@@ -118,6 +118,26 @@ do
 	expect.stub(funStub).to.be.called_with(2, 3, 5)
 end
 
+do -- error message is a string by default
+	local _, msg = pcall(function()
+		expect(true).to.be_false()
+	end)
+
+	expect(msg).to.be.a.string()
+end
+
+do -- and busted.fail is used when busted is loaded
+	package.loaded["luassert.bustez.expect"] = nil
+	require("busted")
+	local busted_expect = require("luassert.bustez.expect")
+
+	local _, msg = pcall(function()
+		busted_expect(true).to.be_false()
+	end)
+
+	expect(msg).to.be.a.table()
+end
+
 do
 	---@class bustez.Expectation
 	---asserts that our expectation is not `nil`

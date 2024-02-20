@@ -7,12 +7,12 @@ local say = require("say")
 
 -- This is needed to be used for busted to
 -- properly recognize it as fail on reporter(and not as error).
-local fail
-local success, _ = pcall(function()
-	fail = require("busted.core")().fail
-end)
+
 -- Falls back to normal error in case busted is not used.
-if not success then
+local fail
+if package.loaded.busted then
+	fail = require("busted.core")().fail
+else
 	fail = error
 end
 
