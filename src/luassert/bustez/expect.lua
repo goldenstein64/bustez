@@ -58,6 +58,8 @@ do
 
 	arg_map = {
 		same = swapped,
+		like = swapped,
+		look_like = swapped,
 		matches = swapped,
 		match = swapped,
 		near = swapped,
