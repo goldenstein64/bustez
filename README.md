@@ -69,6 +69,9 @@ In most cases, `expect(value)[CHAIN HERE](...)` is an alias for `assert[CHAIN HE
 `expect` accepts any assertions and modifiers created using `luassert`.
 
 ```lua
+local say = require 'say'
+local assert = require 'luassert'
+
 ---@class luassert.internal
 ---@field exist fun(value): luassert.internal
 
